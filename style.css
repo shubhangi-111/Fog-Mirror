@@ -1,0 +1,683 @@
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #26333b 0%,
+            #11181c 45%,
+            #080b0d 100%
+        );
+
+}
+
+
+/* =========================
+   ROOM
+========================= */
+
+.room {
+
+    width: min(92vw, 900px);
+
+    height: min(92vh, 700px);
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+/* =========================
+   AMBIENT LIGHT
+========================= */
+
+.room::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 70%;
+
+    height: 90%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(
+                190,
+                220,
+                225,
+                0.12
+            ),
+            transparent 70%
+        );
+
+    filter: blur(50px);
+
+}
+
+
+/* =========================
+   MIRROR FRAME
+========================= */
+
+.mirror-frame {
+
+    width: 62%;
+
+    height: 82%;
+
+    position: relative;
+
+    padding: 13px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #50585b,
+            #171b1d 45%,
+            #666d70
+        );
+
+    box-shadow:
+
+        0 35px 70px
+        rgba(0, 0, 0, 0.65),
+
+        inset 0 0 10px
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
+
+    z-index: 2;
+
+}
+
+
+/* =========================
+   MIRROR SURFACE
+========================= */
+
+.mirror {
+
+    width: 100%;
+
+    height: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            155deg,
+            #172126,
+            #263238 45%,
+            #101619
+        );
+
+}
+
+
+/* =========================
+   CAMERA
+========================= */
+
+#cameraFeed {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    /*
+        Mirror the webcam so it
+        behaves like a real mirror.
+    */
+
+    transform: scaleX(-1);
+
+    /*
+        Keep the user's reflection
+        visible through the fog.
+    */
+
+    opacity: 0.58;
+
+    filter:
+        contrast(0.9)
+        brightness(0.78);
+
+    z-index: 1;
+
+}
+
+
+/* =========================
+   MIRROR UI
+========================= */
+
+.mirror-ui {
+
+    position: absolute;
+
+    inset: 0;
+
+    padding: 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    z-index: 4;
+
+    /*
+        UI shouldn't interfere
+        with hand interaction.
+    */
+
+    pointer-events: none;
+
+}
+
+
+/* =========================
+   TOP SECTION
+========================= */
+
+.top-section {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        flex-start;
+
+}
+
+
+.greeting {
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.65;
+
+}
+
+
+.time-section h1 {
+
+    margin-top: 8px;
+
+    font-size:
+        clamp(
+            42px,
+            7vw,
+            68px
+        );
+
+    font-weight: 200;
+
+    letter-spacing: -3px;
+
+}
+
+
+.time-section #date {
+
+    margin-top: 2px;
+
+    font-size: 13px;
+
+    opacity: 0.6;
+
+}
+
+
+/* =========================
+   STATUS LIGHT
+========================= */
+
+.status-indicator {
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    background:
+        #a9e5d0;
+
+    box-shadow:
+        0 0 15px
+        #a9e5d0;
+
+}
+
+
+/* =========================
+   INFORMATION CARDS
+========================= */
+
+.information-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+}
+
+
+.info-card {
+
+    padding: 16px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.05
+        );
+
+    backdrop-filter:
+        blur(5px);
+
+    border-radius: 13px;
+
+}
+
+
+.label {
+
+    display: block;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    opacity: 0.5;
+
+}
+
+
+.info-card strong {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 20px;
+
+    font-weight: 300;
+
+}
+
+
+/* =========================
+   MIRROR REFLECTION
+========================= */
+
+.reflection {
+
+    position: absolute;
+
+    inset: -30%;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 30%,
+            rgba(
+                255,
+                255,
+                255,
+                0.08
+            ) 42%,
+            transparent 53%
+        );
+
+    transform:
+        rotate(5deg);
+
+    pointer-events: none;
+
+    z-index: 3;
+
+}
+
+
+/* =========================
+   FOG CANVAS
+========================= */
+
+#fogCanvas {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    z-index: 10;
+
+    pointer-events: none;
+
+}
+
+
+/* =========================
+   MIRROR LABEL
+========================= */
+
+.mirror-label {
+
+    position: absolute;
+
+    bottom: -35px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    white-space: nowrap;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.3
+        );
+
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls {
+
+    position: absolute;
+
+    bottom: 15px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    z-index: 20;
+
+}
+
+
+/* =========================
+   FOG BUTTON
+========================= */
+
+#fogButton {
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.14
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.07
+        );
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.75
+        );
+
+    padding:
+        9px 17px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    backdrop-filter:
+        blur(10px);
+
+    font-family:
+        inherit;
+
+    font-size: 11px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+#fogButton:hover {
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.14
+        );
+
+    color: white;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================
+   GESTURE STATUS
+========================= */
+
+.gesture-status {
+
+    padding:
+        9px 17px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
+
+    backdrop-filter:
+        blur(10px);
+
+    border-radius: 999px;
+
+    font-size: 10px;
+
+    letter-spacing: 1.5px;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.55
+        );
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.gesture-status.active {
+
+    color:
+        #c9f5e5;
+
+    border-color:
+        rgba(
+            169,
+            229,
+            208,
+            0.35
+        );
+
+    background:
+        rgba(
+            169,
+            229,
+            208,
+            0.1
+        );
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .mirror-frame {
+
+        width: 82%;
+
+        height: 70%;
+
+    }
+
+
+    .mirror-ui {
+
+        padding: 22px;
+
+    }
+
+
+    .information-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .info-card {
+
+        padding: 10px;
+
+    }
+
+
+    .info-card:nth-child(2),
+    .info-card:nth-child(3) {
+
+        display: none;
+
+    }
+
+}
