@@ -13,7 +13,7 @@ A minimalist smart fog mirror prototype with a hidden information display.
 
 ## Demo
 
-[Live Demo](YOUR_GITHUB_PAGES_URL)
+[Live Demo](https://shubhangi-111.github.io/Fog-Mirror/)
 
 ## Built With
 
